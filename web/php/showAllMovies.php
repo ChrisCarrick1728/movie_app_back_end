@@ -1,12 +1,5 @@
 <?php
-session_start();
-ini_set('session.cookie_secure','On');
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: *");
-header("Access-Control-Allow-Methods: GET,POST");
-
-
-
+include ('sessionstart.php');
 
 //echo "user_id: " . session_status() . " " . session_id();
 $_SESSION['user_id'] = 1;

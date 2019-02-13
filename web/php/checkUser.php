@@ -1,13 +1,9 @@
 <?php
-session_start();
-ini_set('session.gc_maxlifetime', 30*60);
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: *");
-header("Access-Control-Allow-Methods: GET,POST");
+include ('sessionstart.php');
 
-
+//echo "Origin " . $_SERVER['HTTP_ORIGIN'] . "    ";
 include ('db_connect.php');
-//echo "user_id: " . session_status() . " " . session_id();
+echo "user_id: " . session_status() . " " . session_id();
 if (isset($_POST['userName']) && isset($_POST['password'])) {
   try {
     foreach ($db->query('SELECT id, salt FROM users WHERE username=\'' . $_POST['userName'] . '\'') as $userRow)

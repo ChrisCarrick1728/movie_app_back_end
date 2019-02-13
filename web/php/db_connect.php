@@ -25,7 +25,7 @@
 //   echo 'Error!: ' . $ex->getMessage();
 //   die();
 // }
-
+//
 try
 {
   $dbUrl = getenv('DATABASE_URL');
