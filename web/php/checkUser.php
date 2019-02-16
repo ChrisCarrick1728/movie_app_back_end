@@ -1,34 +1,32 @@
 <?php
 include ('sessionstart.php');
-
-//echo "Origin " . $_SERVER['HTTP_ORIGIN'] . "    ";
 include ('db_connect.php');
-echo "user_id: " . session_status() . " " . session_id();
-if (isset($_POST['userName']) && isset($_POST['password'])) {
+$message = [];
+
+if ($_POST['userName']!= '' && $_POST['password'] != '') {
   try {
-    foreach ($db->query('SELECT id, salt FROM users WHERE username=\'' . $_POST['userName'] . '\'') as $userRow)
-    {
+    foreach ($db->query('SELECT id, salt FROM users WHERE username=\'' . $_POST['userName'] . '\'') as $userRow) {
       $_SESSION['user_id'] = $userRow['id'];
-      //echo "user_id: " . $_SESSION['user_id'];
       foreach ($db->query('SELECT hash FROM credentials WHERE user_id=' . $userRow['id']) as $credentialRow) {
-        // todo: compare hash's
-        $_SESSION['userAuthorized'] = 'true';
-        $_SESSION['user_id'] = $userRow['id'];
-        echo true;
-        return;
+        if (password_verify($_POST['password'], $credentialRow['hash'])) {
+          $_SESSION['userAuthorized'] = 'true';
+          $_SESSION['user_id'] = $userRow['id'];
+          array_push($message, 'true');
+        } else {
+          $_SESSION['userAuthorized'] = 'false';
+          array_push($message, 'false1');
+        }
       }
     }
-
   } catch (Exception $e) {
-    $_SESSION['userAuthorized'] = 'false';
-    echo false;
-    return;
+    session_destroy();
+    $_SESSION = [];
+    array_push($message, 'false2');
   }
-  echo false;
-  return;
 } else {
-  $_SESSION['userAuthorized'] = 'false';
-  echo false;
-  return;
+  session_destroy();
+  $_SESSION = [];
+  array_push($message, "false4");
 }
+echo JSON_encode($message);
 ?>

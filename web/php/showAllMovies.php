@@ -2,7 +2,7 @@
 include ('sessionstart.php');
 
 //echo "user_id: " . session_status() . " " . session_id();
-$_SESSION['user_id'] = 1;
+//$_SESSION['user_id'] = 15;
 include ('db_connect.php');
 
 try {
@@ -16,7 +16,7 @@ try {
 
     $movie_stat_statement = $db->query('SELECT user_rating, date_last_watched, times_watched FROM movie_statistics WHERE user_id=\'' . $value['user_id'] . '\' AND movie_id=\'' . $value['movie_id'] . '\'');
     $movie_stat_results = $movie_stat_statement->fetchALL(PDO::FETCH_ASSOC);
-    //echo json_encode($movie_stat_results[$key]);
+    //echo json_encode($movie_stat_results);
     $mergedObj[$key] = (array) array_merge((array) $mergedObj[$key], (array) $movie_stat_results[0]);
 
     $movie_format_statement = $db->query('SELECT format FROM movie_format WHERE id=\'' . $value['media_format'] . '\'');
