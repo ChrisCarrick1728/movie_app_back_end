@@ -5,7 +5,7 @@ $message = [];
 
 if ($_POST['userName']!= '' && $_POST['password'] != '') {
   try {
-    foreach ($db->query('SELECT id, salt FROM users WHERE username=\'' . $_POST['userName'] . '\'') as $userRow) {
+    foreach ($db->query('SELECT id FROM users WHERE username=\'' . $_POST['userName'] . '\'') as $userRow) {
       $_SESSION['user_id'] = $userRow['id'];
       foreach ($db->query('SELECT hash FROM credentials WHERE user_id=' . $userRow['id']) as $credentialRow) {
         if (password_verify($_POST['password'], $credentialRow['hash'])) {
