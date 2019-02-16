@@ -20,7 +20,7 @@ if ($_SERVER['HTTP_ORIGIN'] == 'http://localhost:8080' || !isset($_SERVER['HTTP_
 } else {
   try {
     $dbUrl = getenv('DATABASE_URL');
-
+    echo = "dbURL: " . $dbUrl;
     $dbOpts = parse_url($dbUrl);
 
     $dbHost = $dbOpts["host"];
