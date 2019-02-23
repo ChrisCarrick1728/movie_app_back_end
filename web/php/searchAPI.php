@@ -10,9 +10,8 @@ class movie {
 
 if (isset($_POST['search']) && $_POST['search'] != '') {
   $curl = curl_init();
-  //urlencode($_POST['search'])
   curl_setopt_array($curl, array(
-    CURLOPT_URL => "https://api.themoviedb.org/3/search/movie?include_adult=false&page=1&query=" . urlencode($_POST['search']) . "&language=en-US&api_key=a727b0169f0031ebd41e13d140e8e430",
+    CURLOPT_URL => "https://api.themoviedb.org/3/search/movie?include_adult=false&page=1&query=" . urlencode($_POST['search']) . "&language=en-US&api_key=" . getenv('TMDB_API_KEY'),
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => "",
     CURLOPT_MAXREDIRS => 10,
