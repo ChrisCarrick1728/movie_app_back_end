@@ -9,7 +9,7 @@ if ($_POST['userName']!= '' && $_POST['password'] != '') {
     $statement = $db->prepare($query);
     $statement->bindValue('username', $_POST['userName']);
     $statement->execute();
-    $results = $statement->fetchAll(DBO::FETCH_ASSOC);
+    $results = $statement->fetchAll(PDO::FETCH_ASSOC);
     foreach ($results as $userRow) {
       $_SESSION['user_id'] = $userRow['id'];
       foreach ($db->query('SELECT hash FROM credentials WHERE user_id=' . $userRow['id']) as $credentialRow) {
