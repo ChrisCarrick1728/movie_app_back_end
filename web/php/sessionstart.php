@@ -10,6 +10,7 @@ if ($_SERVER['HTTP_ORIGIN'] === 'https://carrick-cs313-movie-app.herokuapp.com')
   echo "origin: " . $_SERVER['HTTP_ORIGIN'];
 } else {
   echo "not authorized";
+  die();
 }
 
 class message {
