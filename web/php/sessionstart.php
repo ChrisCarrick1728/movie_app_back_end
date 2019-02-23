@@ -8,6 +8,8 @@ if ($_SERVER['HTTP_ORIGIN'] === 'https://carrick-cs313-movie-app.herokuapp.com')
   header("Access-Control-Allow-Methods: GET,POST");
 
   echo "origin: " . $_SERVER['HTTP_ORIGIN'];
+} else {
+  echo "not authorized";
 }
 
 class message {
