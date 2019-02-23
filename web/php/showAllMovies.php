@@ -12,15 +12,11 @@ try {
   $mergedObj = [];
   foreach ($results as $key=>$value) {
     // Get movie details for each movie in users database
-    $query = 'SELECT * FROM movies WHERE id=:movie_id';
-    $statement = $db->prepare($query);
-    $statement->bindValue('movie_id', $value['movie_id']);
-    $statement->execute();
-    $result[$key] = $statement->fetchAll(PDO::FETCH_ASSOC);
-    $mergedObj[$key] = (array) array_merge((array) $results[$key], (array) $result[$key][0]);
-
-    //Get movie movie_statistics
-    $query = 'SELECT user_rating, date_last_watched, times_watched FROM movie_statistics WHERE user_id=:user_id AND movie_id=:movie_id';
+    // Get movie movie_statistics
+    $query = 'SELECT movies.*, movie_statistics.user_rating, movie_statistics.date_last_watched, movie_statistics.times_watched
+              FROM movies
+              INNER JOIN movie_statistics ON movies.id=movie_statistics.movie_id
+              WHERE movie_statistics.user_id=:user_id AND movie_statistics.movie_id=:movie_id';
     $statement = $db->prepare($query);
     $statement->bindValue('user_id', $value['user_id']);
     $statement->bindValue('movie_id', $value['movie_id']);
