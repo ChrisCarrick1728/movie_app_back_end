@@ -2,12 +2,6 @@
 include 'sessionstart.php';
 include 'db_connect.php';
 
-// params.append('title', this.searchResults[event.target.name]['title'])
-// params.append('poster_url', this.searchResults[event.target.name]['poster_url'])
-// params.append('overview', this.searchResults[event.target.name]['overview'])
-// params.append('genre_ids', this.searchResults[event.target.name]['genre_ids'])
-// params.append('format', this.searchResults[event.target.name]['format'])
-
 if (isset($_POST['title']) && $_POST['title'] != '') {
 
   $movie_id = 0;

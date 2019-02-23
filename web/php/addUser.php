@@ -1,8 +1,7 @@
 <?php
 include 'sessionstart.php';
 include 'db_connect.php';
-// error_reporting(E_ALL);
-// ini_set('display_errors', 1);
+
 $username = $_POST['username'];
 $password = $_POST['password'];
 $vPassword = $_POST['vPassword'];
@@ -42,7 +41,6 @@ try {
     array_push($message, "Account created successfully.");
   }
 } catch (Exception $e) {
-  //echo "{'message': 'DB Error: $e '}";
 }
 
 echo JSON_encode($message);
@@ -57,7 +55,6 @@ function checkUserExists($user, $db) {
   }
   return false;
 }
-
 
 function checkEmailExists($email, $db) {
   $query = 'SELECT email FROM users WHERE email=:email';

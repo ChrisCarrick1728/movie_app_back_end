@@ -6,6 +6,8 @@ header('Access-Control-Allow-Credentials: true');
 header("Access-Control-Allow-Headers: *");
 header("Access-Control-Allow-Methods: GET,POST");
 
+echo "origin: " . $_SERVER['HTTP_ORIGIN'];
+
 class message {
   public $message;
 }

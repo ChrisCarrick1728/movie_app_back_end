@@ -8,8 +8,6 @@ class movie {
   public $genre_ids = [];
 }
 
-
-
 if (isset($_POST['search']) && $_POST['search'] != '') {
   $curl = curl_init();
   //urlencode($_POST['search'])
